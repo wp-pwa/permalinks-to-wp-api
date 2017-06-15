@@ -18,16 +18,11 @@ class permalinks_to_wp_rest_api
 {
 	// vars
 	public $plugin_version = '1.0.0';
-	public $rest_api_installed 	= false;
-	public $rest_api_active 	= false;
-	public $rest_api_working	= false;
-
-
 
 	/*
 	*  Constructor
 	*
-	*  This function will construct all the neccessary actions, filters and functions for the Worona plugin to work
+	*  This function will construct all the neccessary actions, filters and functions for the plugin to work
 	*
 	*  @type	function
 	*  @date	@date	15/07/17
@@ -41,17 +36,9 @@ class permalinks_to_wp_rest_api
 	{
 		// actions
 		add_action( 'rest_api_init', function () {
-			register_rest_route( 'worona/v1', '/siteid/', array(
-				'methods' => 'GET',
-				'callback' => array( $this,'get_worona_site_id'))
-			);
-			register_rest_route( 'worona/v1', '/discover/', array(
+			register_rest_route( 'permalinks/v1', '/discover/', array(
 				'methods' => 'GET',
 				'callback' => array( $this,'discover_url'))
-			);
-			register_rest_route( 'worona/v1', '/plugin-version/', array(
-				'methods' => 'GET',
-				'callback' => array( $this,'get_worona_plugin_version'))
 			);
 		});
 		// filters
