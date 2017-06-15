@@ -67,8 +67,10 @@ class permalinks_to_wp_rest_api
 	*	@param \WP_REST_Request $request Full details about the request
 	*/
 	function discover_url( $request ) {
-		$first_folder = $request['first_folder'];
-		$last_folder = $request['last_folder'];
+		$request['url'];
+		preg_match(  "/^\/?([^\/]+)(?:.*?)?([^\/]+)?\/?$/" , $request, $matches );
+		$first_folder = $matches[1];
+		$last_folder = $matches[2];
 
 		if (is_null($last_folder)) {
 			return array('Error' => 'last_folder is missing');
