@@ -90,7 +90,8 @@ class permalinks_to_wp_rest_api
 		);
 		$post = get_posts($args);
 		if ( sizeof($post) > 0 ) {
-			return $post[0];
+      $request = new WP_REST_Request('GET', '/wp/v2/posts/' . $post[0]->ID);
+			return rest_do_request($request);
 		}
 
 		// ----------------
