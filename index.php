@@ -104,7 +104,8 @@ class permalinks_to_wp_rest_api
 		);
 		$page = get_posts($args);
 		if ( sizeof($page) > 0 ) {
-			return $page[0];
+      $request = new WP_REST_Request('GET', '/wp/v2/pages/' . $page[0]->ID);
+			return rest_do_request($request);
 		}
 
 		// ----------------
