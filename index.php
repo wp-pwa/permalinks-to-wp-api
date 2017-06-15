@@ -69,8 +69,9 @@ class permalinks_to_wp_rest_api
 	function discover_url( $request ) {
 		$request['url'];
 		preg_match(  "/^\/?([^\/]+)(?:.*?)?([^\/]+)?\/?$/" , $request, $matches );
-		$first_folder = $matches[1];
-		$last_folder = $matches[2];
+
+		$first_folder = isset($matches[2]) ? $matches[1] : null;
+		$last_folder = isset($matches[2]) ? $matches[2] : $matches[1];
 
 		if (is_null($last_folder)) {
 			return array('Error' => 'last_folder is missing');
