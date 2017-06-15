@@ -190,7 +190,7 @@ class permalinks_to_wp_rest_api
 		// ----------------
 		// first_folder not found
 		// ----------------
-		return array('Error' => $last_folder .' not found');
+		return array('Error' => 'We couldn\'t any result with '. $url);
 	}
 
 }
