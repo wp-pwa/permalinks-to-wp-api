@@ -116,7 +116,9 @@ class permalinks_to_wp_rest_api
 			);
 			$author = get_posts($args);
 			if ( sizeof($author) > 0 ) {
-				return $author[0];
+				$request = new WP_REST_Request('GET', '/wp/v2/posts');
+				$request->set_query_params(array( 'author' => $author[0]->ID));
+				return rest_do_request($request);
 			} else {
 				return( new stdClass() ); //empty object instead of null
 			}
