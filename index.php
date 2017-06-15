@@ -67,8 +67,12 @@ class permalinks_to_wp_rest_api
 	*	@param \WP_REST_Request $request Full details about the request
 	*/
 	function discover_url( $request ) {
-		$request['url'];
-		preg_match(  "/^\/?([^\/]+)(?:.*?)?([^\/]+)?\/?$/" , $request, $matches );
+
+		if (!isset($request['url'])) {
+			return array('Error' => 'url param is missing');
+		}
+
+		preg_match(  "/^\/?([^\/]+)(?:.*?)?([^\/]+)?\/?$/" , $request['url'], $matches );
 
 		$first_folder = isset($matches[2]) ? $matches[1] : null;
 		$last_folder = isset($matches[2]) ? $matches[2] : $matches[1];
