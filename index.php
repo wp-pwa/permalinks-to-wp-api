@@ -126,9 +126,13 @@ class permalinks_to_wp_rest_api
 		// ----------------
 		// Category
 		// ----------------
-		$category = get_term_by('slug',$last_folder,'category');
+		$category = get_term_by('slug', $last_folder, 'category');
 		if( $category ) {
-			return $category;
+      $request = new WP_REST_Request('GET', '/wp/v2/posts');
+      $request->set_query_params(array(
+        "categories" => $category->term_id
+      ));
+			return rest_do_request($request);
 		}
 
 		// ----------------
